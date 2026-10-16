@@ -31,11 +31,11 @@ sockets: dict[int, set[WebSocket]] = {}
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
     global store
-    conn = connect()
-    init_db(conn)
-    store = Store(conn)
+    client = connect()
+    init_db(client)
+    store = Store(client)
     yield
-    conn.close()
+    client.close()
 
 
 app = FastAPI(title="Sealed Chat", lifespan=lifespan)
@@ -159,11 +159,12 @@ async def register(body: RegisterIn, request: Request):
             now(),
         ),
     )
-    token = issue_session(cur.lastrowid)
+    
+    token = issue_session(cur.last_insert_rowid)
     return {
         "token": token,
         "user": {
-            "id": cur.lastrowid,
+            "id": cur.last_insert_rowid,
             "username": body.username,
             "ecdh_public": body.ecdh_public,
             "ecdsa_public": body.ecdsa_public,

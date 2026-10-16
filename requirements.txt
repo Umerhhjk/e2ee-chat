@@ -3,3 +3,4 @@ uvicorn
 websockets
 argon2-cffi
 pydantic
+libsql-client
