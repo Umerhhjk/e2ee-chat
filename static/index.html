@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sealed Chat</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Source+Sans+3:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="gate" class="gate">
+      <div class="gate-card">
+        <p class="eyebrow">End-to-end sealed</p>
+        <h1>Sealed Chat</h1>
+        <p class="lede">
+          Messages are encrypted on this device. The server only stores ciphertext
+          it cannot read.
+        </p>
+        <div class="tabs">
+          <button id="tab-login" class="tab active" type="button">Sign in</button>
+          <button id="tab-register" class="tab" type="button">Create account</button>
+        </div>
+        <form id="auth-form">
+          <label>
+            Username
+            <input id="username" autocomplete="username" maxlength="24" required />
+          </label>
+          <label>
+            Password
+            <input id="password" type="password" autocomplete="current-password" minlength="8" required />
+          </label>
+          <button id="auth-submit" type="submit">Enter</button>
+          <p id="auth-error" class="error" hidden></p>
+        </form>
+      </div>
+    </div>
+
+    <div id="app" class="app" hidden>
+      <aside class="sidebar">
+        <header class="brand">
+          <div>
+            <p class="eyebrow">Signed in as</p>
+            <h2 id="me-name">—</h2>
+          </div>
+          <button id="logout" type="button" class="ghost">Lock</button>
+        </header>
+        <form id="find-form" class="find">
+          <input id="find-user" placeholder="Message a username" maxlength="24" />
+          <button type="submit">Open</button>
+        </form>
+        <ul id="convos" class="convos"></ul>
+        <p class="footnote">Local history is encrypted SQLite. Lock wipes this browser copy.</p>
+      </aside>
+      <main class="thread">
+        <div id="empty-thread" class="empty-thread">
+          <h3>No conversation open</h3>
+          <p>Pick someone from the left, or type a username to start chatting.</p>
+        </div>
+        <section id="chat" class="chat" hidden>
+          <header class="chat-head">
+            <div>
+              <h3 id="peer-name">—</h3>
+              <p id="peer-status">Sealed with ECDH + AES-GCM. Signed with ECDSA.</p>
+            </div>
+          </header>
+          <ol id="log" class="log"></ol>
+          <form id="composer">
+            <textarea id="draft" rows="1" placeholder="Write a sealed note…" maxlength="4000"></textarea>
+            <button type="submit">Send</button>
+          </form>
+        </section>
+      </main>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+    <script src="/static/js/crypto.js"></script>
+    <script src="/static/js/store.js"></script>
+    <script src="/static/js/app.js"></script>
+  </body>
+</html>

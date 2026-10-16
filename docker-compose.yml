@@ -1,0 +1,11 @@
+services:
+  chat:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - chat-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  chat-data:

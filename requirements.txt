@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+websockets
+argon2-cffi
+pydantic

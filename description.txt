@@ -1,0 +1,13 @@
+i need to make a p2p application that exchanges messages between parties. i want to make it so that all messages are encrypted on client side, and then sent to the server, where the server then stores it in it's database and it is then forwarded to the recipient, where the client side recipient then decrypts the encrypted msg. 
+
+.) the client side should create a local sqllite db where it will store chat history with anyone the user messages.
+.) the password should be stored as a hash in the servers db.
+.) when a message is to be sent, it is first encrypted on the client side and then sent to the server, and the server logs this encrypted message, and then sends the encrypted msg to intended recipient, where the client side recipient then decrypts the msg.
+.) the server must not know what the message is or have the capability to be able to decrypt it. the server must never be sent the unencrypted message.
+.) the app needs proper integrity verification for the messages to know that they have not been tampered with. 
+.) there needs to be proper protections against dos type attacks.
+.) proper session management needs to be done to prevent csrf type attacks.
+.) i want replay attack protection
+.) i want forensic resisitant local storage
+
+i am going to build it in python, could you give me some feasible idea through which i can make it so that the clients talking with each other are able to decrypt the message but the server cannot?
